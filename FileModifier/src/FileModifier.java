@@ -1,15 +1,40 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+public class FileModifier {
+    public static void main(String[] args) {
+        //File folder = new File("FileList/");
+        //File folder = new File("c:/Users/hubhs/Desktop/New/");
+        File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_FTV_11_exp/");
+
+        File[] listOfFiles = folder.listFiles();
+
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Írd be a lecserélni kívánt szöveget: ");
+        String oldText = scan.nextLine();
+        System.out.println("Írd be az új szöveget: ");
+        String newText = scan.nextLine();
+
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                try {
+                    Path filePath = Paths.get(file.getPath());
+                    List<String> lines = Files.readAllLines(filePath);
+                    List<String> newLines = new ArrayList<>();
+
+                    for (String line : lines) {
+                        String newLine = line.replaceAll(oldText,newText);
+                        newLines.add(newLine);
+                    }
+                    Files.write(filePath,newLines,StandardOpenOption.TRUNCATE_EXISTING);
+                } catch (IOException i){
+                    System.out.println("Unable to read the file: " + file);
+                }
+            }
         }
     }
 }
