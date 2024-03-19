@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 public class Search {
     public static void main(String[] args) {
-        File folder = new File("c:/Users/hubhs/Desktop/OC1504_FTV_11_exp/");
-        //File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_FTV_11_exp/");
+        //File folder = new File("c:/Users/hubhs/Desktop/OC1504_FTV_11_exp/");
+        File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_FTV_8_20_mod/");
 
         File[] listOfFiles = folder.listFiles();
 
@@ -26,7 +26,7 @@ public class Search {
                     for (String line : lines) {
                         if (line.contains(text)) {
                             int startIndex = line.indexOf(text);
-                            if (line.substring(startIndex,startIndex + 24).equals("fileVersion=\"11.0.230.0\"")) {
+                            if (line.substring(startIndex,startIndex + 24).equals("fileVersion=\"8.20.10.43\"")) {
                                 System.out.println(line.substring(startIndex,startIndex + 24));
                             } else {
                                 System.out.println(line.substring(startIndex,startIndex + 24) + " " + file);

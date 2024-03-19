@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class FileModifier {
     public static void main(String[] args) {
         //File folder = new File("c:/Users/hubhs/Desktop/New/");
-        File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_FTV_11_exp/");
+        File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_FTV_8_20_mod/");
 
         File[] listOfFiles = folder.listFiles();
 
