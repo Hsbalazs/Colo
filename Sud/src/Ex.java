@@ -1,7 +1,6 @@
-import java.sql.Array;
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Ex {
     public static void main(String[] args) {
@@ -33,7 +32,7 @@ public class Ex {
 
         //Excercise 6:
         String s = "Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Morbi nec mattis odio.";
-        //System.out.println("\nExcercise 6: \n" + listOfUppercaseCharacters(s));
+        System.out.println("\nExcercise 6: \n" + listOfUppercaseCharacters(s));
         //List<Character> expectedOutput = Arrays.asList('L', 'I', 'D', 'S', 'A', 'C', 'A', 'E', 'M');
 
         //Excercise 7:
@@ -73,10 +72,13 @@ public class Ex {
                 .collect(Collectors.toList());
     }
 
-    //private static List<Character> listOfUppercaseCharacters(String s) {
-    //    char[] ch = s.toCharArray();
-    //    return
-    //}
+    private static List<Character> listOfUppercaseCharacters(String s) {
+        return s
+                .chars()
+                .mapToObj(c-> (char) c)
+                .filter(Character::isUpperCase)
+                .collect(Collectors.toList());
+    }
 
     private static int sumOfOddNumbers(List<Integer> numbers) {
         return numbers
