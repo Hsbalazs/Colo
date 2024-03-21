@@ -53,6 +53,53 @@ public class Ex {
         String s1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.";
         System.out.println("\nExcercise 9: \n" + frequencyOfCharacters(s1));
         //{ =12, a=2, c=4, d=7, e=8, g=1, i=10, l=2, ,=2, L=1, m=5, n=4, .=1, o=7, p=3, r=4, s=6, t=7, u=4}
+
+        //Excercise 10:
+        List<Fox> foxes = new ArrayList<>();
+        foxes.add(new Fox("Bucky",10,"red"));
+        foxes.add(new Fox("Chuky",9,"green"));
+        foxes.add(new Fox("Hulk",3,"yellow"));
+        foxes.add(new Fox("Rusty",5,"black"));
+        foxes.add(new Fox("Rudy",6,"green"));
+        foxes.add(new Fox("Gaby",10,"red"));
+        foxes.add(new Fox("Trench",4,"green"));
+        foxes.add(new Fox("Ready",7,"blue"));
+
+        System.out.println("\nExcercise 10: \n" + greenColoredFoxes(foxes));
+        System.out.println(greenColoredFoxesYoungerThan5(foxes));
+        System.out.println(frequencyOfFoxesByColor(foxes));
+        //System.out.println("\nExcercise 10: \n" + frequencyOfColors(foxes));
+
+        //Create a Fox class with 3 properties: name, color and age.
+        //Create a list of foxes and add at least 8 instances to it. Then, using the Stream API
+
+        //write a method to return a list of foxes of green color
+        //[Fox[4, GREEN, Skuld], Fox[9, GREEN, Hildr]]
+        //write a method to return a list of foxes of green color younger than 5
+        //        [Fox[4, GREEN, Skuld]]
+        //write a method to return a map specifying the frequency of foxes by color
+        //{GREEN=2, WHITE=1, BLACK=1, GRAY=1, RED=3}
+    }
+
+    private static Map<String,Long> frequencyOfFoxesByColor(List<Fox> foxes) {
+        return foxes
+                .stream()
+                .map(f-> f.color)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    private static List<Fox> greenColoredFoxesYoungerThan5(List<Fox> foxes) {
+        return foxes
+                .stream()
+                .filter(x->x.color == "green" && x.age < 5)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Fox> greenColoredFoxes(List<Fox> foxes) {
+        return foxes
+                .stream()
+                .filter(x->x.color == "green")
+                .collect(Collectors.toList());
     }
 
 
