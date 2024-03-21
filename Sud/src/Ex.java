@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -49,14 +50,18 @@ public class Ex {
         //String expectedOutput = "Lorem ipsum";
 
         //Excercise 9:
-        //String s = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.";
-        //System.out.println("\nExcercise 9: \n" + frequencyOfCharacters(s));
+        String s1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.";
+        System.out.println("\nExcercise 9: \n" + frequencyOfCharacters(s1));
         //{ =12, a=2, c=4, d=7, e=8, g=1, i=10, l=2, ,=2, L=1, m=5, n=4, .=1, o=7, p=3, r=4, s=6, t=7, u=4}
     }
 
-    //private static HashMap<String,Integer> frequencyOfCharacters(String s) {
-    //    return Collections.
-    //}
+
+    private static Map<Character,Long> frequencyOfCharacters(String s) {
+        return s
+                .chars()
+                .mapToObj(c->(char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
 
     private static String concatenateCharacters(List<Character> characters) {
         return characters
