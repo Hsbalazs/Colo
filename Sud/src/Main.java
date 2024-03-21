@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -14,7 +13,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        int row = 3, column = 3;
+        int row = 9, column = row;
         int[][] sud = new int[row][column];
         generateNumber(sud, row,column);
         printSud(sud);
@@ -32,13 +31,15 @@ public class Main {
         int number;
         for (int i = 0; i < sud.length; i++) {
             List<Integer> possibleList = getNumbersUsingIntStreamRange(1,sud.length + 1);
+            //System.out.println(possibleList);
             for (int j = 0; j < sud.length; j++) {
-                number = possibleList.get(rn.nextInt(possibleList.size()));
-                while (isInRow(sud,i,number) || isInColumn(sud,j,number)) {
-                    number = possibleList.get(rn.nextInt(possibleList.size()));
-                }
+                do{number = possibleList.get(rn.nextInt(possibleList.size()));}
+                while (isInRow(sud,i,number) || isInColumn(sud,j,number));
+
                 sud[i][j] = number;
+                System.out.print(number + " ");
                 possibleList.remove(possibleList.indexOf(number));
+                //System.out.println(possibleList);
             }
         }
     }
