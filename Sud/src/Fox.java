@@ -9,4 +9,7 @@ public class Fox {
         this.age = age;
         this.color = color;
     }
+    public String toString() {
+        return "Fox[" + this.name + ", " + this.color + ", " + this.age + "]";
+    }
 }

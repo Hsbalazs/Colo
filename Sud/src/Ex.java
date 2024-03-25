@@ -88,17 +88,19 @@ public class Ex {
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
-    private static List<Fox> greenColoredFoxesYoungerThan5(List<Fox> foxes) {
+    private static List<String> greenColoredFoxesYoungerThan5(List<Fox> foxes) {
         return foxes
                 .stream()
                 .filter(x->x.color == "green" && x.age < 5)
+                .map(Fox::toString)
                 .collect(Collectors.toList());
     }
 
-    private static List<Fox> greenColoredFoxes(List<Fox> foxes) {
+    private static List<String> greenColoredFoxes(List<Fox> foxes) {
         return foxes
                 .stream()
                 .filter(x->x.color == "green")
+                .map(Fox::toString)
                 .collect(Collectors.toList());
     }
 
