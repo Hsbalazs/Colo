@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         int row = 9, column = row;
         int[][] sud = new int[row][column];
-        generateNumber(sud, row,column);
-        //printSud(sud);
+        fillRowsWithNumbers(sud);
+        printSud(sud);
     }
     public static void printSud(int[][]sud) {
         for (int i = 0; i < sud.length; i++) {
@@ -23,18 +23,29 @@ public class Main {
             }
         }
     }
-    public static void generateNumber(int[][] sud, int row, int column) {
-        Random rn = new Random();
-        int number;
+    public static void fillRowsWithNumbers(int[][] sud) {
         for (int i = 0; i < sud.length; i++) {
-            List<Integer> possibleList = getNumbersUsingIntStreamRange(1,sud.length + 1);
-            for (int j = 0; j < sud.length; j++) {
-                do{number = possibleList.get(rn.nextInt(possibleList.size()));}
-                while (isInRow(sud,i,number) || isInColumn(sud,j,number) || isInBox(sud,i,j,number));
-                sud[i][j] = number;
-                System.out.print(number);
-                possibleList.remove((Integer) number);
+            generateLineOfNumbers(sud,i);
+        }
+    }
+    public static void generateLineOfNumbers(int[][] sud, int row) {
+        Random rn = new Random();
+        List<Integer> possibleList = getNumbersUsingIntStreamRange(1,sud.length + 1);
+        int number;
+        int count = 0;
+        for (int j = 0; j < sud.length; j++) {
+            do{ number = possibleList.get(rn.nextInt(possibleList.size()));
+                count++;
+                if (count > 10) {
+                    System.out.println("Hiba helye: " + row + "-" + j);
+                    //generateLineOfNumbers(sud, row);
+                    break;
+                    }
             }
+            while (isInRow(sud,row,number) || isInColumn(sud,j,number) || isInBox(sud,row,j,number));
+            sud[row][j] = number;
+            count = 0;
+            possibleList.remove((Integer) number);
         }
     }
     public static boolean isInRow(int[][]sud, int row, int number){
@@ -68,12 +79,10 @@ public class Main {
         };
     }
     public static int boxSelector(int row, int column) {
-        //int[] currentPosition = {row,column};
         String currentPosition = row + "-" + column;
         int currentBox = 0;
         for (int i = 0; i < boxes().length; i++) {
             for (int j = 0; j < boxes()[i].length; j++) {
-                //int[] box = boxes()[i][j];
                 String box = boxes()[i][j][0] + "-" + boxes()[i][j][1];
                 if (currentPosition.equals(box)) {
                     currentBox = i;
@@ -86,7 +95,6 @@ public class Main {
     public static List<Integer> generateCurrentBoxList(int[][] sud, int row, int column) {
         List<Integer> currentBoxList = new ArrayList<>();
         int[][] template = boxes()[boxSelector(row,column)];
-        List<Integer> list = new ArrayList<>();
         for (int[] ints : template) {
             currentBoxList.add(sud[ints[0]][ints[1]]);
         }
