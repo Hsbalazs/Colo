@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class FileModifier {
     public static void main(String[] args) {
         //File folder = new File("c:/Users/hubhs/Desktop/New/");
-        File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_PriDP_FTV_11/");
+        File folder = new File("//fshutat01/operations_development/Users/HUGDANY/OC1504_PT_FTV_11/");
         File[] listOfFiles = folder.listFiles();
         Scanner scan = new Scanner(System.in);
         //System.out.println("Írd be a lecserélni kívánt szöveget: ");
@@ -26,7 +26,8 @@ public class FileModifier {
                                 .replaceAll("useAlarmIdentifier=\"false\"", "")
                                 .replaceAll("UseEchoMessage=\"false\"", "")
                                 .replaceAll("UseVariableMesssageFile=\"false\"", "")
-                                .replaceAll("fileVersion=\"11.0.230.0\"", "fileVersion=\"8.20.10.43\"");
+                                .replaceAll("fileName=\"WebBrowser.ocx\" fileVersion=\"11.0.230.0\"", "fileName=\"WebBrowser.ocx\" fileVersion=\"8.20.10.0\"")
+                                .replaceAll("fileName=\"ME_Chart.ocx\" fileVersion=\"11.0.230.0\"", "fileName=\"ME_Chart.ocx\" fileVersion=\"8.20.10.43\"");
                         newLines.add(newLine);
                     }
                     Files.write(filePath, newLines, StandardOpenOption.TRUNCATE_EXISTING);
